@@ -1,0 +1,203 @@
+📥 1. Image Input / Output
+
+cv2.imread('image.jpg') → Read image
+
+img = cv2.imread('image.jpg')
+
+
+cv2.imwrite('output.jpg', img) → Save image
+
+cv2.imwrite('output.jpg', img)
+
+
+cv2.imshow('window', img) → Show image
+
+cv2.imshow('Image', img)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+🎨 2. Color Conversions
+
+cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) → Convert to grayscale
+
+gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+
+cv2.cvtColor(img, cv2.COLOR_BGR2HSV) → Convert to HSV
+
+hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+
+
+cv2.cvtColor(img, cv2.COLOR_BGR2RGB) → Convert to RGB
+
+rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+
+✂️ 3. Resize & Crop
+
+cv2.resize(img, (200, 200)) → Resize image
+
+small = cv2.resize(img, (200, 200))
+
+
+img[y1:y2, x1:x2] → Crop image
+
+crop = img[50:200, 100:300]
+
+🔄 4. Geometric Transformations
+
+cv2.flip(img, 1) → Flip image horizontally
+
+flipped = cv2.flip(img, 1)
+
+
+cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE) → Rotate 90°
+
+rot = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE)
+
+
+cv2.warpAffine(img, M, (w, h)) → Apply affine transform
+
+M = cv2.getRotationMatrix2D((100,100), 45, 1)
+result = cv2.warpAffine(img, M, (300, 300))
+
+🖍️ 5. Drawing on Images
+
+cv2.line(img, (0,0), (100,100), (255,0,0), 2)
+Draw line
+
+cv2.rectangle(img, (50,50), (200,200), (0,255,0), 3)
+Draw rectangle
+
+cv2.circle(img, (150,150), 50, (0,0,255), -1)
+Draw circle
+
+cv2.putText(img, 'Hello', (10,50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,255,255), 2)
+Write text
+
+🧽 6. Blurring / Filtering
+
+cv2.blur(img, (5,5)) → Average blur
+
+cv2.GaussianBlur(img, (5,5), 0) → Gaussian blur
+
+cv2.medianBlur(img, 5) → Median blur
+
+cv2.bilateralFilter(img, 9, 75, 75) → Edge-preserving blur
+
+⚡ 7. Thresholding
+
+cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
+
+_, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
+
+
+cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 11, 2)
+Adaptive threshold
+
+🧭 8. Edge Detection
+
+cv2.Canny(img, 100, 200) → Detect edges
+
+cv2.Sobel(img, cv2.CV_64F, 1, 0, ksize=5) → Sobel X
+
+cv2.Laplacian(img, cv2.CV_64F) → Laplacian edges
+
+🧱 9. Morphological Operations
+
+cv2.erode(img, kernel, iterations=1)
+
+cv2.dilate(img, kernel, iterations=1)
+
+cv2.morphologyEx(img, cv2.MORPH_OPEN, kernel)
+
+kernel = np.ones((5,5), np.uint8)
+result = cv2.morphologyEx(img, cv2.MORPH_CLOSE, kernel)
+
+🔹 10. Contours
+
+cv2.findContours(binary, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+
+contours, _ = cv2.findContours(binary, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+
+
+cv2.drawContours(img, contours, -1, (0,255,0), 2)
+Draw contours
+
+cv2.contourArea(cnt) → Area of contour
+
+cv2.arcLength(cnt, True) → Perimeter
+
+🔲 11. Bitwise & Arithmetic
+
+cv2.add(img1, img2) → Add images
+
+cv2.subtract(img1, img2) → Subtract images
+
+cv2.bitwise_and(img1, img2) → AND
+
+cv2.bitwise_or(img1, img2) → OR
+
+cv2.bitwise_not(img) → NOT
+
+👁️ 12. Face Detection
+
+cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+
+face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+faces = face_cascade.detectMultiScale(gray, 1.3, 5)
+
+
+cv2.rectangle(img, (x,y), (x+w,y+h), (255,0,0), 2)
+Draw face box
+
+🎥 13. Video Processing
+
+cv2.VideoCapture(0) → Capture from webcam
+
+cap = cv2.VideoCapture(0)
+ret, frame = cap.read()
+
+
+cv2.VideoWriter('output.avi', fourcc, 20.0, (640,480)) → Save video
+
+🧮 14. Feature Detection
+
+cv2.cornerHarris(gray, 2, 3, 0.04) → Harris corner
+
+cv2.goodFeaturesToTrack(gray, 25, 0.01, 10) → Shi-Tomasi
+
+cv2.SIFT_create() → SIFT feature detector
+
+cv2.ORB_create() → ORB feature detector
+
+🧠 15. Deep Learning (DNN)
+
+cv2.dnn.readNetFromCaffe(proto, model) → Load Caffe model
+
+cv2.dnn.readNetFromTensorflow(model) → Load TensorFlow model
+
+net.forward() → Forward pass
+
+🔡 16. OCR (Text Recognition)
+
+pytesseract.image_to_string(img) → Extract text from image
+
+import pytesseract
+text = pytesseract.image_to_string(img)
+
+🎯 17. Object Tracking
+
+cv2.TrackerKCF_create()
+
+cv2.TrackerCSRT_create()
+
+cv2.TrackerMOSSE_create()
+
+tracker = cv2.TrackerCSRT_create()
+ok = tracker.init(frame, bbox)
+
+📊 18. Histograms
+
+cv2.calcHist([img], [0], None, [256], [0,256]) → Compute histogram
+
+cv2.equalizeHist(gray) → Equalize brightness
