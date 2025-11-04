@@ -201,3 +201,65 @@ ok = tracker.init(frame, bbox)
 cv2.calcHist([img], [0], None, [256], [0,256]) → Compute histogram
 
 cv2.equalizeHist(gray) → Equalize brightness
+
+
+
+
+
+
+-------------------------------
+
+
+🎥 1. Reading and Writing Videos
+▶️ cv2.VideoCapture()
+
+Opens a video file or camera stream.
+
+import cv2
+cap = cv2.VideoCapture(0)  # 0 = webcam, or use 'video.mp4'
+
+
+Common methods:
+
+cap.isOpened()             # Check if video opened successfully
+ret, frame = cap.read()    # Read one frame
+cap.release()              # Release camera/video resource
+
+💾 cv2.VideoWriter()
+
+Saves video frames to a file.
+
+fourcc = cv2.VideoWriter_fourcc(*'XVID')  # Codec
+out = cv2.VideoWriter('output.avi', fourcc, 20.0, (640,480))
+out.write(frame)  # Write each frame
+out.release()
+
+🎞️ 2. Getting and Setting Video Properties
+📏 Get properties
+width  = cap.get(cv2.CAP_PROP_FRAME_WIDTH)
+height = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
+fps    = cap.get(cv2.CAP_PROP_FPS)
+frame_count = cap.get(cv2.CAP_PROP_FRAME_COUNT)
+
+⚙️ Set properties
+cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
+cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
+cap.set(cv2.CAP_PROP_FPS, 30)
+
+🧭 3. Video Display and Control
+🖼️ Display video frames
+while True:
+    ret, frame = cap.read()
+    if not ret:
+        break
+    cv2.imshow('Video', frame)
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+cv2.destroyAllWindows()
+
+⏸️ Pause / Resume
+
+You can simulate pause with cv2.waitKey(0).
+
+if cv2.waitKey(25) & 0xFF == ord('p'):
+    cv2.waitKey(-1)  # Wait until any key is pressed
